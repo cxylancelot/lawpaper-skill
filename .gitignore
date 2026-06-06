@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Backup files
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
