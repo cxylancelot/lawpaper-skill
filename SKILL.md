@@ -1,20 +1,24 @@
 ---
 name: lawpaper
-description: 知识库来自《法学论文写作》何海波著。用于法学论文写作的系统方法指导与协作写作，涵盖选题、文献、调查、论证、行文、格式规范与学术伦理的全流程。既是教练也是代笔——边思考边指导边和你讨论，然后帮你写出来。 - 写法学论文、法学选题、法条分析、判例分析、法学文献综述、法学毕业论文、法律硕士论文、法学论证、法学引注、论文大纲、论文修改、帮我写论文
-version: 2.0.0
+description: 知识库来自《法学论文写作》何海波著，融合田洪鋆《批判性思维与写作》、CUPL十讲、张翔/苏力/杨立新/尤陈俊等20+份法学写作参考资料。用于法学论文写作的系统方法指导与协作写作，涵盖选题、文献、调查、论证、行文、格式规范与学术伦理的全流程。既是教练也是代笔——边思考边指导边和你讨论，然后帮你写出来。 - 写法学论文、法学选题、法条分析、判例分析、法学文献综述、法学毕业论文、法律硕士论文、法学论证、法学引注、论文大纲、论文修改、帮我写论文
+version: 2.1.0
 platforms: [macos, linux, windows]
 metadata:
   hermes:
     tags: [research, academic-writing, law, legal-studies, thesis, paper-writing, co-writing]
     category: research
     related_skills: [literature-verifier, paper-formatter, argument-auditor, cjournal-analyzer]
+  claude-code:
+    skill_type: research
+    context_budget: high
+    compatible_skill_tool: true
 ---
 
 # 法学论文写作全流程协作
 
-> **知识来源**：何海波《法学论文写作》，全书七篇体系。
+> **知识来源**：何海波《法学论文写作》七篇体系 + 田洪鋆《批判性思维与写作》+ CUPL十讲（雷磊/张翔等）+ 苏力/杨立新/尤陈俊/周大鸣等20+份法学写作参考资料 + 法学引注手册第二版。
 > **双重能力**：既是法学论文写作教练（指导你怎么做、检查你做得好不好），也是你的代笔（和你讨论清楚后，帮你把论文写出来）。
-> **适用范围**：法教义学论文、案例分析、立法评述、比较法论文、实证研究、法哲学论文。覆盖本科/硕士/博士毕业论文及期刊投稿。
+> **适用范围**：法教义学论文、案例分析、立法评述、比较法论文、实证研究、法哲学论文、书评论文。覆盖本科/硕士/博士毕业论文及期刊投稿。
 
 ---
 
@@ -136,14 +140,15 @@ metadata:
 
 | 资源 | 何时加载 | 路径 |
 |------|---------|------|
+| 批判性思维与论证框架 | 论证阶段诊断+行文卡住 | `references/critical-thinking.md` |
 | 法学理论框架速查 | 选题阶段厘清理论定位 | `references/theory-frameworks.md` |
 | 法学论文范例拆解 | 参考同类论文写法 | `references/model-papers.md` |
 | 常见错误病例 | 自查或讨论时对照 | `references/common-mistakes.md` |
 | 协作场景模式库 | 不确定该怎么协作了 | `references/collaboration-patterns.md` |
 | 阶段关卡检查清单 | 每阶段结束时 | `references/stage-checklists.md` |
 | 法学常用表达词库 | 行文润色 | `references/academic-expressions.md` |
-| 子代理分工设计 | 多角色协作 | `references/subagent-roles.md` |
-| 学习循环集成 | 更新 skill 内容 | `references/learning-loop.md` |
+| 子代理分工设计 | 多角色协作 | `adapters/hermes/subagent-roles.md` |
+| 学习循环集成 | 更新 skill 内容 | `adapters/hermes/learning-loop.md` |
 
 ---
 
@@ -419,18 +424,38 @@ metadata:
 
 ---
 
-## Pitfalls —— 法学论文 10 大常见误区
+## Pitfalls —— 法学论文 20 大常见误区
 
-1. **问题意识缺失**：论文写成了教科书式的"关于X的法律制度研究"
-2. **文献综述 = 文献罗列**：只列了"XX说……YY认为……"，没有分类、评述、批评
-3. **法条堆砌代替分析**：大量引用法条原文但不做解释和分析
-4. **比较法论证失当**：简单罗列外国法，没说明"为什么选这个法域""借鉴的限度"
-5. **以偏概全的法条解释**：根据一个条文的一个词语做文章，忽略体系位置和立法目的
-6. **忽略但书条款**：引用法条时只引主文不引但书，结论被但书推翻
-7. **判例引注缺要素**：案号/法院/日期不全，读者无法查找核实
-8. **引注过期法条**：引用了已废止的法律而未注明
-9. **摘要写成内容简介**："本文分析了X，介绍了Y，提出了Z"
-10. **结语重复前言**：把各章小结重新抄一遍拼在一起
+### 选题篇
+1. **问题意识缺失（教科书式论文）**：论文写成了"关于X的法律制度研究"，面面俱到介绍知识点而无中心论点
+2. **摘抄式/流水账式论文**：跟着一本书的思路复述，或按时间节点排列材料而无问题线索
+3. **"有论域而无命题"**：只圈定研究范围，没有贯穿全文的中心命题（question≠problem≠issue）
+4. **选题过大或过小**：宏观到无法驾驭，或微观到缺乏理论延展空间
+
+### 文献篇
+5. **文献综述 = 文献罗列**：只列了"XX说……YY认为……"，没有分类、评述、批评
+6. **照搬他人文献综述**：不核实原始文献就直接复制别人的综述
+7. **文献综述与主题脱节**：写完综述后正文不再回应，前后割裂
+
+### 论证篇
+8. **将说明当作论证**：论文写成了"说明文"，只陈述不证明
+9. **将价值判断/修辞当作论证**：用价值立场或华丽辞藻替代逻辑推理
+10. **法条堆砌代替分析**：大量引用法条原文但不做解释和分析
+11. **"给出原因"≠"推理证明"**：主观理由（"我觉得"）替代客观可检验的论证
+12. **比较法论证失当**：简单罗列外国法，没说明"为什么选这个法域""借鉴的限度"
+13. **以偏概全的法条解释**：根据一个条文的一个词语做文章，忽略体系位置和立法目的
+14. **忽略但书条款**：引用法条时只引主文不引但书，结论被但书推翻
+
+### 行文篇
+15. **摘要写成内容简介**："本文分析了X，介绍了Y，提出了Z"——没有呈现核心观点和论证路径
+16. **滥用"高级词汇"**：盲目模仿晦涩表达，词不达意，准确是写作的第一前提
+17. **结语重复前言**：把各章小结重新抄一遍拼在一起
+18. **标题无信息量**：标题与论文主题之间找不出关联
+
+### 格式篇
+19. **笼统引用淡化前人贡献**："前人已做过一些探索……都存在不足"——不说明具体贡献和不足
+20. **引注过期法条/判例缺要素**：引用已废止法律未注明；案号/法院/日期不全
+21. **转引用不核原件**：从二手来源引用而不核实原始文献，易出错
 
 → 详细病例：`references/common-mistakes.md`
 
@@ -450,40 +475,34 @@ metadata:
 ### 参考素材层
 | 文件 | 内容 | 加载触发 |
 |------|------|---------|
-| `references/theory-frameworks.md` | 6大法学流派速查卡 | "用什么理论框架" |
+| `references/theory-frameworks.md` | 6大法学流派速查卡 + 批判性思维元方法 | "用什么理论框架" |
 | `references/model-papers.md` | 5类型各1篇范例拆解 | "有没有范文" |
-| `references/common-mistakes.md` | 按七篇组织的错误病例 | "帮我检查论文" |
+| `references/common-mistakes.md` | 按七篇组织的错误病例（20+条） | "帮我检查论文" |
+| `references/critical-thinking.md` | 批判性思维与论证框架 | "论证有问题""批判性思维" |
 
 ### 七篇方法层
 | 文件 | 内容 | 加载触发 |
 |------|------|---------|
-| `references/topic-selection.md` | 选题篇 | "怎么选题""这个题目能写吗" |
-| `references/literature-search.md` | 文献篇 | "怎么查文献""北大法宝怎么用" |
+| `references/topic-selection.md` | 选题篇（含选题六法+问题三层区分+"前后左右"学术传统） | "怎么选题""这个题目能写吗" |
+| `references/literature-search.md` | 文献篇（含综述四步法+八错误+批判性阅读思维链） | "怎么查文献""文献综述怎么写" |
 | `references/investigation-methods.md` | 调查篇 | "用什么方法""案例分析怎么做" |
-| `references/legal-argumentation.md` | 论证篇 | "怎么论证""论证有没有问题" |
-| `references/legal-writing.md` | 行文篇 | "论文结构""引言怎么写""摘要怎么写" |
-| `references/legal-citation.md` | 格式篇 | "引注格式""法条怎么引""判例怎么引" |
+| `references/legal-argumentation.md` | 论证篇（含批判性思维视角+论证vs非论证区分） | "怎么论证""论证有没有问题" |
+| `references/legal-writing.md` | 行文篇（含排比材料+粗写细写+摘要12条+积累三层级） | "论文结构""引言怎么写""摘要怎么写" |
+| `references/legal-citation.md` | 格式篇（含量/质/技/道四维度+引注手册第二版） | "引注格式""法条怎么引""判例怎么引" |
 | `references/legal-ethics.md` | 伦理篇 | "学术规范""类案检索义务""法条时效" |
 
 ### 流程工具层
 | 文件 | 内容 | 加载触发 |
 |------|------|---------|
 | `references/collaboration-patterns.md` | 6种协作场景模式库 | "不知道该怎么写""卡住了" |
-| `references/stage-checklists.md` | 7份关卡检查清单 | "检查一下""能不能进入下一步" |
+| `references/stage-checklists.md` | 7份关卡检查清单（含批判性思维+引注检查） | "检查一下""能不能进入下一步" |
 | `references/decision-tree.md` | 论文类型决策树 | "写什么类型的论文" |
-| `references/academic-expressions.md` | 法学常用表达词库 | "这个怎么表述""润色一下" |
+| `references/academic-expressions.md` | 法学常用表达词库（含论证建构用语） | "这个怎么表述""润色一下" |
 
-### hermes 原生能力层
+### 平台适配层
 | 文件 | 内容 | 加载触发 |
 |------|------|---------|
-| `references/subagent-roles.md` | 5个子代理角色 | "多角色协作" |
-| `references/learning-loop.md` | 学习循环集成 | "更新skill""这个规则变了" |
-
-### 脚本与模板
-| 文件 | 内容 | 加载触发 |
-|------|------|---------|
-| `scripts/review_legal.py` | 8维质量检查 | "帮我检查论文质量" |
-| `scripts/check_stage.py` | 关卡自动化 | "检查一下选题阶段" |
-| `templates/paper-outline.md` | 6类型大纲模板 | "给我一个大纲模板" |
-| `templates/argument-map.md` | 论证骨架图模板 | "帮我理一下论证逻辑" |
-| `templates/citation-checklist.md` | 引注自查表 | "投稿前检查引注" |
+| `adapters/hermes/subagent-roles.md` | 5个子代理角色（Hermes专用） | "多角色协作" |
+| `adapters/hermes/learning-loop.md` | 学习循环集成（Hermes专用） | "更新skill""这个规则变了" |
+| `adapters/claude-code/skill-config.yaml` | Claude Code Skill 元数据 | （平台自动加载） |
+| `adapters/claude-code/hooks.md` | Claude Code 适配说明 | （平台参考） |

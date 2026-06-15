@@ -1,0 +1,23 @@
+{
+  "name": "lawpaper",
+  "version": "2.1.0",
+  "type": "skill",
+  "platform": "hermes",
+  "loading": {
+    "level0": "skills_list()",
+    "level1": "skill_view('lawpaper')",
+    "level2": "skill_view('lawpaper', 'references/<name>.md')"
+  },
+  "files": {
+    "main": "../SKILL.md",
+    "references": "../references/",
+    "templates": "../templates/",
+    "scripts": "../scripts/"
+  },
+  "subagents": {
+    "roles": "subagent-roles.md"
+  },
+  "self_update": {
+    "hooks": "learning-loop.md"
+  }
+}

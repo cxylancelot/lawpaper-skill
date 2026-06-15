@@ -34,6 +34,9 @@
 | 1.4 | 核心概念有明确的操作性定义（"本文所称X，指的是……"） | → `references/topic-selection.md` 第五章 |
 | 1.5 | 我的选题与目标期刊的选题偏好方向一致 | → `references/topic-selection.md` 第四章 |
 | 1.6 | 如有理论框架，已知该框架的适用场景和边界 | → `references/theory-frameworks.md` |
+| 1.7 | 我的论文有一个贯穿全文的中心命题（issue），而非仅有研究范围（problem）或疑问（question） | → `references/topic-selection.md` §1.4 |
+| 1.8 | 论文不属于三种无问题意识的类型（教科书式/摘抄式/流水账式） | → `references/topic-selection.md` §1.5 |
+| 1.9 | 标题符合设计原则：直接、简明、有吸引力、一个中心词、副标题必要 | → `references/topic-selection.md` §10 |
 
 ---
 
@@ -48,6 +51,8 @@
 | 2.5 | 没有任何文献我未读原文但描述了其论证过程 | → SKILL.md R3 |
 | 2.6 | 文献综述有"评"（分类+评述+批评+定位）而非只"罗" | → `references/legal-writing.md` 第三章 |
 | 2.7 | 文献综述明确说清了我的论文在已有研究中的位置 | → `references/legal-writing.md` 第三章 |
+| 2.8 | 文献综述避免了八种常见错误（照搬/罗列/随意/脱节/无重点/放弃批判/回避冲突/选择性探讨） | → `references/literature-search.md` §6 |
+| 2.9 | 文献综述经过了四步法（概述→摘要→批判→建议） | → `references/literature-search.md` §7 |
 
 ---
 
@@ -72,6 +77,9 @@
 | 4.4 | 论证无7类逻辑问题（主张不清/论据不足/逻辑跳跃/循环论证/过度概推/稻草人/引而不证） | → `references/legal-argumentation.md` 第二章 |
 | 4.5 | 已做过反例压力测试——我知道"如果有人反对我，他们最好的理由是什么"，并已在论文中回应 | → `references/legal-argumentation.md` 第三章 |
 | 4.6 | 所有引用的法条都已检查但书条款，确保论证不因忽略但书而被推翻 | → `references/legal-argumentation.md` 方法1 + `references/common-mistakes.md` 错误8 |
+| 4.7 | 论证通过了"论证vs非论证"检查——论文中没有把说明/价值判断/修辞/说服/无根据断言当作论证 | → `references/legal-argumentation.md` §4.1 + `references/critical-thinking.md` §5 |
+| 4.8 | 每个主张的理由是"能使别人相信的客观理由"而非"自己相信的主观理由" | → `references/legal-argumentation.md` §4.2 |
+| 4.9 | 已检查是否存在常见论证谬误（稻草人/范畴错误/层面错位/合成/分解/人身攻击） | → `references/legal-argumentation.md` §4.4 |
 
 ---
 
@@ -86,6 +94,9 @@
 | 5.5 | 标题使用"[对象]：[论证方向]"格式 | → `references/legal-writing.md` 第五章 |
 | 5.6 | 文中无口语化表达、无自称不统一 | → `references/academic-expressions.md` |
 | 5.7 | 结论不重复前言和各章摘要——说出了只有站在全文高度才能看到的整体结论 | → `references/legal-writing.md` 第四章 |
+| 5.8 | 摘要=小论文：包含问题意识+研究方法+基本内容+基本观点+学术价值（非内容简介） | → `references/legal-writing.md` §9 |
+| 5.9 | 摘要无主观评论语（"全面深入地分析了""有很高的学术价值"等） | → `references/legal-writing.md` §9.3 |
+| 5.10 | 行文准确为先——无滥用"高级词汇"、文白混杂、词不达意 | → `references/common-mistakes.md` 错误23 |
 
 ---
 
@@ -99,6 +110,11 @@
 | 6.4 | 文献（期刊/专著/文集/学位论文/网络资料）引注格式正确 | → `references/legal-citation.md` 第四章 |
 | 6.5 | 全篇引注风格一致（不要一半《法学引注手册》一半 GB/T 7714） | → `references/legal-citation.md` 第五、七章 |
 | 6.6 | 脚注编号连续、无重复/跳跃 | → `references/legal-citation.md` 第六章 |
+| 6.7 | 直接引用与融化转述的使用场景恰当——直引无冗长/隔膜/滞涩，转述忠实原意 | → `references/legal-citation.md` §7 |
+| 6.8 | 引注数量适度——既无"应该引而未引"，也无"为注而注" | → `references/legal-citation.md` §6 |
+| 6.9 | 对前人成果的引用具体说明了贡献与不足（非笼统一笔带过） | → `references/legal-citation.md` §8.3 |
+| 6.10 | 所有引注已核对原始文献（非转引二手来源而未注明） | → `references/legal-citation.md` §8.3 + `references/common-mistakes.md` 错误25 |
+| 6.11 | 区分了"注"（出处）和"释"（补充说明） | → `references/legal-citation.md` §8.1 |
 
 ---
 

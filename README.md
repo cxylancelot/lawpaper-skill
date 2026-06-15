@@ -1,73 +1,210 @@
-# lawpaper-skill
+# Lawpaper-Skill
 
-> 法学论文写作全流程协作 Skill — 知识库来自何海波《法学论文写作》
+法学论文写作全流程协作 skill——既是教练也是代笔。知识体系融合何海波《法学论文写作》+ 田洪鋆《批判性思维与写作》+ CUPL十讲（雷磊/张翔等）+ 苏力/杨立新/尤陈俊/周大鸣等20+份法学写作参考资料 + 法学引注手册第二版。
 
-## 概述
+**平台**：Hermes-agent（Nous Research）+ Claude Code 双平台，遵循 agentskills.io 开放标准。
 
-本 skill 为 Claude Code 提供法学论文写作的系统方法指导，涵盖**选题、文献、调查、论证、行文、格式规范与学术伦理**的全流程。既是写作教练（诊断→追问→讨论→下笔→回顾），也是你的代笔——和你讨论清楚后，帮你把论文写出来。
+---
 
-## 适用范围
+## 一句话介绍
 
-- 法教义学论文 / 案例分析 / 立法评述 / 比较法论文 / 实证研究 / 法哲学论文
-- 本科毕业论文 / 硕士论文 / 博士论文 / 期刊投稿
+你有思路、有开题报告、有材料，但写不出来。这个 skill 一边按照法学方法论思考，一边追问讨论，一边帮你把论文写出来。
 
-## 目录结构
-
-```
-lawpaper-skill/
-├── SKILL.md                  # 主 skill 定义（工作流、硬性规则、方法论）
-├── references/               # 参考知识库（16 个文件）
-│   ├── topic-selection.md        # 选题篇
-│   ├── literature-search.md      # 文献篇
-│   ├── investigation-methods.md  # 调查篇
-│   ├── legal-argumentation.md    # 论证篇
-│   ├── legal-writing.md          # 行文篇
-│   ├── legal-citation.md         # 格式篇
-│   ├── legal-ethics.md           # 伦理篇
-│   ├── theory-frameworks.md      # 法学理论框架速查
-│   ├── model-papers.md           # 范例论文拆解
-│   ├── common-mistakes.md        # 常见错误病例
-│   ├── stage-checklists.md       # 阶段关卡检查清单
-│   ├── decision-tree.md          # 论文类型决策树
-│   ├── academic-expressions.md   # 法学常用表达词库
-│   ├── collaboration-patterns.md # 协作场景模式库
-│   ├── subagent-roles.md         # 子代理角色设计
-│   └── learning-loop.md          # 学习循环集成
-├── scripts/                  # 质检脚本
-│   ├── review_legal.py           # 8 维质量检查
-│   └── check_stage.py            # 关卡自动化检查
-├── templates/                # 论文模板
-│   ├── paper-outline.md          # 6 类型大纲模板
-│   ├── argument-map.md           # 论证骨架图模板
-│   └── citation-checklist.md     # 引注自查表
-└── .gitignore
-```
+---
 
 ## 安装
 
-将此 skill 安装到 Claude Code：
-
-```
-# 方式一：通过 skill-installer
-/skill-installer cxylancelot/lawpaper-skill
-
-# 方式二：手动安装
-# 将本仓库克隆到 .claude/skills/lawpaper-skill/ 目录下
+```bash
+cp -r lawpaper-skill ~/.hermes/skills/research/lawpaper/
 ```
 
-## 核心方法论
+重启 hermes-agent 后自动生效。
 
-**原则**：
-1. **问题从规范/判例中生长出来** — 好问题是"被材料逼出来的"
-2. **论证以法教义学为基础，兼收社科方法** — 先穷尽规范分析再引入外部视角
-3. **引注即论证** — 每个引注都在回答"这个主张的规范基础在哪里"
+## 触发方式
 
-**硬性规则**：不编造文献、不虚构引文、不混淆"作者观点"和"引用的观点"、法条必须核验现行有效版本、判例引用必须标注案号/法院/日期。
+对 agent 说以下任意关键词即可触发：
+- **论文类型**：法学论文、法学毕业论文、法律硕士论文、博士论文、期刊投稿
+- **写作阶段**：法学选题、论文大纲、文献综述、论文修改、开题报告、帮我写
+- **技术环节**：法学引注、法学论证、摘要怎么写、判例分析、法条分析
 
-## 知识来源
+或者直接输入 `/lawpaper`。
 
-何海波《法学论文写作》，全书七篇体系。
+---
 
-## License
+## 工作方式
+
+不是"给 prompt → 出结果"的一次性生成，而是 5 种行为的协作循环：
+
+| 行为 | 做什么 |
+|------|--------|
+| 🔍 **诊断** | 根据方法论分析你已有材料，识别缺口 |
+| ❓ **追问** | 每次问一个问题，直到信息够下笔 |
+| 💬 **讨论** | 分析每个选项的利弊，帮你判断但不替你决定 |
+| ✍️ **下笔** | 按方法论写草稿，附带教练批注（写法逻辑+风险+变体） |
+| 🔄 **回顾** | 不满意或后续发现前期问题，回到前面重新走 |
+
+**核心原则**：你是论文的主人。skill 帮你思考、帮你写，但核心论点、材料选择、最终判断始终是你的。
+
+---
+
+## 覆盖范围
+
+| 阶段 | 对应书篇 | 协作产出 |
+|------|---------|---------|
+| Step 0 | —— | 诊断用户状态 + 确定论文类型 |
+| Step 1 | 选题篇 | 选题陈述草稿（研究对象+核心问题+论点+方法） |
+| Step 2 | 文献篇 | 检索策略 + 文献验证 + 文献综述草稿 |
+| Step 3 | 调查篇 | 研究方法设计 + 方法部分草稿 |
+| Step 4 | 论证篇 | 论证结构诊断 + 论证段落草稿（Toulmin模型） |
+| Step 5 | 行文篇 | 大纲→引言→各章节→摘要→结论，逐节协作下笔 |
+| Step 6 | 格式篇 | 引注格式化 + 参考文献整理 |
+| Step 7 | 伦理篇 | 类案检索/法条时效/脱敏审查 |
+| Final | —— | 自动化质量检查（31条规则+8个维度） |
+
+**适用论文类型**：法教义学论文 / 案例分析 / 立法评述 / 比较法论文 / 实证研究 / 法哲学论文
+
+---
+
+## 文件结构
+
+```
+lawpaper-skill/
+├── README.md
+├── SKILL.md                          # 主编排文件（v2.1.0）
+│
+├── references/                       # 17 个平台中立知识模块
+│   ├── theory-frameworks.md          # 6大法学流派速查卡 + 批判性思维元方法
+│   ├── model-papers.md               # 5类型论文范例拆解
+│   ├── common-mistakes.md            # 26种常见错误+反面例子+处方
+│   ├── critical-thinking.md          # 🆕 批判性思维与论证框架（田洪鋆）
+│   ├── topic-selection.md            # 选题篇：6种方法+问题三层区分+"前后左右"学术传统+标题设计
+│   ├── literature-search.md          # 文献篇：6大数据库+检索技巧+综述四步法+八错误
+│   ├── investigation-methods.md      # 调查篇：4种方法+四层一致性检查
+│   ├── legal-argumentation.md        # 论证篇：6种方法+Toulmin+论证vs非论证五大区分
+│   ├── legal-writing.md              # 行文篇：5种结构+排比材料+粗写细写+摘要12条+积累三层级
+│   ├── legal-citation.md             # 格式篇：引注量/质/技/道四维度+引注手册第二版
+│   ├── legal-ethics.md               # 伦理篇：类案检索+法条时效+脱敏+AI披露
+│   ├── collaboration-patterns.md     # 6种协作场景模式库
+│   ├── stage-checklists.md           # 7份关卡清单（60+检查项）
+│   ├── decision-tree.md              # 论文类型决策树
+│   └── academic-expressions.md       # 法学常用表达词库（含论证建构+批判性评价用语）
+│
+├── adapters/                         # 🆕 平台适配层
+│   ├── hermes/                       # Hermes-agent 专用文件
+│   │   ├── manifest.json
+│   │   ├── subagent-roles.md
+│   │   └── learning-loop.md
+│   └── claude-code/                  # Claude Code 适配
+│       ├── skill-config.yaml
+│       └── hooks.md
+│
+├── scripts/
+│   ├── review_legal.py               # 8维31条规则自动化质量检查
+│   └── check_stage.py                # 8阶段关卡交互/自动检查
+│
+└── templates/
+    ├── paper-outline.md              # 6类型填空式大纲模板
+    ├── argument-map.md               # Toulmin论证骨架图
+    └── citation-checklist.md         # 投稿前引注核对表
+```
+
+---
+
+## 硬性规则（R1-R8）
+
+每次下笔都受 8 条不可妥协的规则约束：
+
+- **R1**：不编造文献、引文、数据、法条
+- **R2**：区分知道和不知道，不确定处用占位符
+- **R3**：不据标题推测内容，不混淆作者观点与引述观点
+- **R4**：生成后自查文献真实性、法条版本、判例引注完整性
+- **R5**：法条引用必须注明版本和时效
+- **R6**：判例引用必须标注案号、审理法院、裁判日期
+- **R7**：代笔生成的文献/法条/判例引用一律用占位符，不编造
+- **R8**：每次下笔必须附教练批注（写法逻辑+风险+变体）
+
+---
+
+## 渐进式加载
+
+遵循 hermes-agent 的三级渐进式披露：
+- **Level 0**（`skills_list()`）：仅加载 name + description
+- **Level 1**（`skill_view("lawpaper")`）：加载完整 SKILL.md（~5000 tokens）
+- **Level 2**（`skill_view("lawpaper", "references/XXX.md")`）：按需加载深度模块
+
+---
+
+## 质量审查脚本
+
+### review_legal.py
+
+```bash
+python scripts/review_legal.py paper.md              # 默认文本输出
+python scripts/review_legal.py paper.md --json       # JSON 输出
+python scripts/review_legal.py paper.md --severity error  # 仅 Error 级别
+python scripts/review_legal.py paper.md -o report.md # 输出到文件
+```
+
+8 个检查维度：可信度 / 术语一致性 / 格式规范 / 学术语体 / 论证逻辑 / 结构完整性 / 法学引注 / 法学逻辑
+
+### check_stage.py
+
+```bash
+python scripts/check_stage.py 1                # Step 1 交互式关卡检查
+python scripts/check_stage.py 3 -f paper.md    # Step 3 自动检查
+python scripts/check_stage.py list             # 列出所有阶段
+```
+
+---
+
+## 协作场景示例
+
+### 场景：你有开题报告但写不出正文
+
+```
+你：我有开题报告，但正文一直写不出来
+skill（🔍诊断）：我读了你的开题报告。核心问题是"XX制度在司法实践中的适用分歧"，
+     这可以是一个好问题。但我注意到你的开题在两个地方不够清楚：
+     1. "采用案例分析的方法"——选了哪些案例？选它们的标准是什么？
+     2. "本文认为应当对法条做限缩解释"——限缩到什么程度？有没有人主张相反的观点？
+
+你：案例我还没选，大概方向是最高法的指导案例和公报案例
+skill（❓追问）：最高法的公报案例里有3个涉及你这个问题，它们对同一问题的裁判
+     标准一致吗？如果一致，你的论文要说什么？如果不一致，分歧点在哪？
+
+你：不一致！这就是我想写的
+skill（✍️下笔）：好，这个张力足以支撑一篇论文了。我先帮你写一段选题陈述……
+
+    ✍️ 选题陈述草稿
+    [正文内容]
+    ---
+    📋 教练批注
+    - 写法逻辑：从"三个公报案例对同一法条的解释不一致"切入，制造张力，引出核心问题
+    - 风险：需要确认这三个案例确实构成"冲突"而非"不同事实下的合理区分"
+            如果你确认有冲突，这个选题的创新性是够的
+    - 变体：如果"三个案例"的张力不够强，可以改成"以指导案例XX号为中心，
+           分析其裁判要旨在后续案件中的适用分歧"
+    - 待用户补充：三个公报案例的具体案号和裁判日期
+```
+
+---
+
+## 致谢
+
+- 何海波《法学论文写作》（北京大学出版社）——v1.0-2.0 知识骨架
+- 田洪鋆《批判性思维与写作》（北京大学出版社，2021年）——v2.1 新增批判性思维框架
+- 中国政法大学法学院编《法学论文写作：方法与技巧十讲》（中国法制出版社，2020年）——v2.1 新增（雷磊/张翔等）
+- 苏力、杨立新、尤陈俊、周大鸣、张丽华、张庆宗、邓勇、张少瑜、国远、蒋志如等学者的法学写作论文——v2.1 新增
+- 《法学引注手册》第二版——v2.1 更新引注规范
+- 《法学期刊编辑说》——v2.1 新增期刊编辑视角
+- 现有 skill 生态中内嵌集成的方法论来自：`literature-verifier`、`argument-auditor`、`paper-formatter`、`cjournal-analyzer`、`humanities-thesis` 等
+
+## 版本
+
+- **v2.1.0** — 双平台兼容 + 20+份新参考资料深度融入 + 批判性思维框架 + 引注格式四维度 + 选题六法 + 文献综述四步法 + 写作操作化流程
+- **v2.0.0** — 教练+代笔双模协作
+- **v1.0.0** — 纯教练模式
+
+## 许可
 
 MIT
